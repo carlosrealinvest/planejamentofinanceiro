@@ -147,29 +147,6 @@
   /* ── DIVIDER ── */
   .divider { height: 1px; background: var(--border); margin: 24px 0; }
 
-  /* ── GENDER TOGGLE ── */
-  .gender-group { display: flex; gap: 12px; margin-top: 2px; }
-  .gender-btn {
-    flex: 1;
-    padding: 10px;
-    border: 2px solid var(--border);
-    border-radius: 8px;
-    background: #fafbfd;
-    cursor: pointer;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.88rem;
-    color: var(--muted);
-    font-weight: 500;
-    transition: all 0.18s;
-    display: flex; align-items: center; justify-content: center; gap: 6px;
-  }
-  .gender-btn.active {
-    border-color: var(--primary);
-    background: rgba(203,62,71,0.06);
-    color: var(--primary);
-  }
-  .gender-btn input[type=radio] { display: none; }
-
   /* ── TABLE-LIKE rows ── */
   .table-header {
     display: grid;
@@ -233,68 +210,8 @@
     margin-bottom: 10px;
     align-items: center;
   }
-  .liquidavel-check {
-    display: flex; align-items: center; justify-content: center;
-    gap: 6px; font-size: 0.8rem; color: var(--slate);
-  }
-  .liquidavel-check input[type=checkbox] {
-    width: 18px; height: 18px;
-    accent-color: var(--green);
-    cursor: pointer;
-  }
+  .pat-header.pat-2col, #pat-container .pat-row { grid-template-columns: 2fr 1.2fr; }
 
-  /* ── RISCO ── */
-  .risco-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
-    padding: 14px 18px;
-    border-radius: 10px;
-    background: var(--light);
-    margin-bottom: 10px;
-    border: 1px solid transparent;
-    transition: border-color 0.2s;
-  }
-  .risco-item:hover { border-color: var(--border); }
-  .risco-num {
-    width: 26px; height: 26px;
-    border-radius: 50%;
-    background: var(--primary);
-    color: white;
-    font-size: 0.72rem;
-    font-weight: 700;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0; margin-top: 1px;
-  }
-  .risco-text { flex: 1; font-size: 0.88rem; color: var(--text); line-height: 1.5; }
-  .risco-toggle { display: flex; gap: 8px; flex-shrink: 0; }
-  .risco-btn {
-    padding: 5px 14px;
-    border-radius: 20px;
-    border: 2px solid var(--border);
-    background: white;
-    cursor: pointer;
-    font-size: 0.78rem;
-    font-weight: 600;
-    color: var(--muted);
-    transition: all 0.15s;
-  }
-  .risco-btn.sim.active { border-color: var(--primary); background: var(--primary); color: white; }
-  .risco-btn.nao.active { border-color: var(--green); background: var(--green); color: white; }
-
-  /* Risco especial: altura/peso */
-  .risco-input-row { flex: 1; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
-  .risco-input-row input {
-    border: 2px solid var(--border); border-radius: 8px;
-    padding: 6px 12px; font-size: 0.85rem; width: 100px;
-    font-family: 'DM Sans', sans-serif; outline: none;
-    transition: border-color 0.2s;
-  }
-  .risco-input-row input:focus { border-color: var(--primary); }
-  .risco-input-row label { font-size: 0.78rem; color: var(--muted); }
-
-  /* ── ANOTAÇÕES ── */
-  .anotacoes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 
   /* ── BOTÃO ── */
   .cta-bar {
@@ -334,9 +251,6 @@
     .intro-banner, .cta-bar { display: none !important; }
     .container { padding: 16px; max-width: 100%; }
     .section { box-shadow: none; border: 1px solid var(--border); page-break-inside: avoid; }
-    .gender-btn.active { border-color: var(--primary) !important; background: rgba(203,62,71,0.08) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    .risco-btn.sim.active { background: var(--primary) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    .risco-btn.nao.active { background: var(--green) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   }
 
   @media (max-width: 640px) {
@@ -349,7 +263,6 @@
     .table-row { grid-template-columns: 1fr; }
     .table-row .row-label { margin-bottom: -6px; }
     .pat-row { grid-template-columns: 1fr 1fr; }
-    .anotacoes-grid { grid-template-columns: 1fr; }
     .cta-bar { padding: 16px 20px; }
     .intro-banner { padding: 14px 20px; }
   }
@@ -374,11 +287,11 @@
 
 <div class="container">
 
-  <!-- ── 1. INFORMAÇÕES DO CLIENTE ── -->
+  <!-- ── 1. INFORMAÇÕES PESSOAIS ── -->
   <div class="section">
     <div class="section-header">
       <span class="s-icon">👤</span>
-      <h2>Informações do Cliente</h2>
+      <h2>Informações Pessoais</h2>
       <span class="badge">Dados pessoais</span>
     </div>
     <div class="section-body">
@@ -415,8 +328,22 @@
           </select>
         </div>
         <div class="field">
+          <label>Regime da União</label>
+          <select id="regime_uniao">
+            <option value="">Selecione...</option>
+            <option>Não se Aplica</option>
+            <option>Comunhão Parcial de Bens</option>
+            <option>Comunhão Universal de Bens</option>
+            <option>Separação Total de Bens</option>
+          </select>
+        </div>
+        <div class="field">
           <label>Nome do cônjuge / companheiro(a)</label>
           <input type="text" id="conjuge" placeholder="Se aplicável">
+        </div>
+        <div class="field">
+          <label>Data de Nascimento Cônjuge</label>
+          <input type="date" id="nascimento_conjuge">
         </div>
       </div>
 
@@ -424,23 +351,10 @@
 
       <div class="grid-2">
         <div class="field">
-          <label>Gênero</label>
-          <div class="gender-group">
-            <label class="gender-btn" id="btn-masc">
-              <input type="radio" name="genero" value="Masculino" onchange="toggleGender(this)">
-              ♂ Masculino
-            </label>
-            <label class="gender-btn" id="btn-fem">
-              <input type="radio" name="genero" value="Feminino" onchange="toggleGender(this)">
-              ♀ Feminino
-            </label>
-          </div>
-        </div>
-        <div class="field">
           <label>E-mail</label>
           <input type="email" id="email" placeholder="seu@email.com">
         </div>
-        <div class="field span-2">
+        <div class="field">
           <label>Telefone / WhatsApp</label>
           <input type="tel" id="telefone" placeholder="(00) 00000-0000">
         </div>
@@ -539,19 +453,24 @@
       </div>
       <div id="obj-container">
         <div class="table-row" style="grid-template-columns: 2fr 1fr 1fr;">
-          <div class="field"><input type="text" placeholder="Descreva o objetivo"></div>
-          <div class="field"><input type="text" placeholder="R$ 0,00"></div>
-          <div class="field"><input type="number" placeholder="Ex: 5" min="1"></div>
-        </div>
-        <div class="table-row" style="grid-template-columns: 2fr 1fr 1fr;">
-          <div class="field"><input type="text" placeholder="Descreva o objetivo"></div>
+          <div class="field"><input type="text" placeholder="Ex: Aposentadoria"></div>
           <div class="field"><input type="text" placeholder="R$ 0,00"></div>
           <div class="field"><input type="number" placeholder="Ex: 10" min="1"></div>
         </div>
         <div class="table-row" style="grid-template-columns: 2fr 1fr 1fr;">
-          <div class="field"><input type="text" placeholder="Descreva o objetivo"></div>
+          <div class="field"><input type="text" placeholder="Ex: Compra de Imóvel"></div>
           <div class="field"><input type="text" placeholder="R$ 0,00"></div>
-          <div class="field"><input type="number" placeholder="Ex: 15" min="1"></div>
+          <div class="field"><input type="number" placeholder="Ex: 5" min="1"></div>
+        </div>
+        <div class="table-row" style="grid-template-columns: 2fr 1fr 1fr;">
+          <div class="field"><input type="text" placeholder="Ex: Compra de Automóvel"></div>
+          <div class="field"><input type="text" placeholder="R$ 0,00"></div>
+          <div class="field"><input type="number" placeholder="Ex: 2" min="1"></div>
+        </div>
+        <div class="table-row" style="grid-template-columns: 2fr 1fr 1fr;">
+          <div class="field"><input type="text" placeholder="Ex: Viagem"></div>
+          <div class="field"><input type="text" placeholder="R$ 0,00"></div>
+          <div class="field"><input type="number" placeholder="Ex: 1" min="1"></div>
         </div>
         <div class="table-row" style="grid-template-columns: 2fr 1fr 1fr;">
           <div class="field"><input type="text" placeholder="Descreva o objetivo"></div>
@@ -562,29 +481,29 @@
     </div>
   </div>
 
-  <!-- ── 5. CUSTOS ── -->
+  <!-- ── 5. RECEITAS E DESPESAS ── -->
   <div class="section">
     <div class="section-header">
       <span class="s-icon">💸</span>
-      <h2>Custos Familiares</h2>
+      <h2>Receitas e Despesas</h2>
     </div>
     <div class="section-body">
       <div class="grid-2">
+        <div class="field">
+          <label>Renda mensal familiar (R$)</label>
+          <input type="text" id="renda_familiar" placeholder="R$ 0,00">
+        </div>
+        <div class="field">
+          <label>Outras rendas mensais (R$)</label>
+          <input type="text" id="outras_rendas_familia" placeholder="R$ 0,00">
+        </div>
         <div class="field">
           <label>Despesa mensal familiar (R$)</label>
           <input type="text" id="despesa_mensal" placeholder="R$ 0,00">
         </div>
         <div class="field">
-          <label>Sua participação nas despesas (%)</label>
+          <label>Sua participação nas Receitas e Despesas (%)</label>
           <input type="number" id="participacao" placeholder="Ex: 70" min="0" max="100">
-        </div>
-        <div class="field">
-          <label>Por quantos anos manter o padrão de vida?</label>
-          <input type="number" id="manutencao_anos" placeholder="Ex: 20" min="1">
-        </div>
-        <div class="field">
-          <label>Meses para restabelecimento de vida</label>
-          <input type="number" id="restabelecimento_meses" placeholder="Ex: 6" min="1">
         </div>
       </div>
     </div>
@@ -597,170 +516,48 @@
       <h2>Patrimônio</h2>
     </div>
     <div class="section-body">
-      <div class="pat-header">
+      <div class="pat-header pat-2col">
         <span>Ativo</span>
         <span>Valor estimado (R$)</span>
-        <span>Liquidável?</span>
       </div>
       <div id="pat-container">
         <div class="pat-row">
           <div class="field"><input type="text" placeholder="Ex: Imóvel residencial"></div>
           <div class="field"><input type="text" placeholder="R$ 0,00"></div>
-          <div class="liquidavel-check"><input type="checkbox"><span>Sim</span></div>
         </div>
         <div class="pat-row">
           <div class="field"><input type="text" placeholder="Ex: Veículo"></div>
           <div class="field"><input type="text" placeholder="R$ 0,00"></div>
-          <div class="liquidavel-check"><input type="checkbox"><span>Sim</span></div>
         </div>
         <div class="pat-row">
-          <div class="field"><input type="text" placeholder="Ex: Investimentos"></div>
+          <div class="field"><input type="text" placeholder="Ex: Investimentos Brasil NÃO PREVIDÊNCIA"></div>
           <div class="field"><input type="text" placeholder="R$ 0,00"></div>
-          <div class="liquidavel-check"><input type="checkbox"><span>Sim</span></div>
+        </div>
+        <div class="pat-row">
+          <div class="field"><input type="text" placeholder="Ex: Investimentos Internacional NÃO PREVIDÊNCIA"></div>
+          <div class="field"><input type="text" placeholder="R$ 0,00"></div>
+        </div>
+        <div class="pat-row">
+          <div class="field"><input type="text" placeholder="Ex: Previdência Privada"></div>
+          <div class="field"><input type="text" placeholder="R$ 0,00"></div>
+        </div>
+        <div class="pat-row">
+          <div class="field"><input type="text" placeholder="Ex: Imóvel de aluguel 1"></div>
+          <div class="field"><input type="text" placeholder="R$ 0,00"></div>
+        </div>
+        <div class="pat-row">
+          <div class="field"><input type="text" placeholder="Ex: Imóvel de aluguel 2"></div>
+          <div class="field"><input type="text" placeholder="R$ 0,00"></div>
         </div>
         <div class="pat-row">
           <div class="field"><input type="text" placeholder=""></div>
           <div class="field"><input type="text" placeholder="R$ 0,00"></div>
-          <div class="liquidavel-check"><input type="checkbox"><span>Sim</span></div>
-        </div>
-        <div class="pat-row">
-          <div class="field"><input type="text" placeholder=""></div>
-          <div class="field"><input type="text" placeholder="R$ 0,00"></div>
-          <div class="liquidavel-check"><input type="checkbox"><span>Sim</span></div>
-        </div>
-      </div>
-      <div class="divider"></div>
-      <div class="field" style="max-width:280px;">
-        <label>Custo de transmissão sucessória (% — ITCMD, honorários e outros)</label>
-        <input type="number" id="itcmd" placeholder="Ex: 8" min="0" max="100">
-      </div>
-    </div>
-  </div>
-
-  <!-- ── 7. RECEITAS ── -->
-  <div class="section">
-    <div class="section-header">
-      <span class="s-icon">💰</span>
-      <h2>Receitas Realizadas</h2>
-    </div>
-    <div class="section-body">
-      <div class="grid-2">
-        <div class="field">
-          <label>Renda bruta mensal (R$)</label>
-          <input type="text" id="renda_bruta" placeholder="R$ 0,00">
-        </div>
-        <div class="field">
-          <label>Saldo acumulado FGTS (R$)</label>
-          <input type="text" id="fgts" placeholder="R$ 0,00">
-        </div>
-        <div class="field">
-          <label>Previdência privada (R$)</label>
-          <input type="text" id="previdencia" placeholder="R$ 0,00">
-        </div>
-        <div class="field">
-          <label>Seguro de vida existente (R$)</label>
-          <input type="text" id="seguro_existente" placeholder="R$ 0,00">
-        </div>
-        <div class="field">
-          <label>Pensão INSS / outros (R$ mensal)</label>
-          <input type="text" id="pensao" placeholder="R$ 0,00">
-        </div>
-        <div class="field">
-          <label>Outras rendas mensais (R$)</label>
-          <input type="text" id="outras_rendas" placeholder="R$ 0,00">
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ── 8. ANÁLISE DE RISCO ── -->
-  <div class="section">
-    <div class="section-header">
-      <span class="s-icon">🩺</span>
-      <h2>Questões — Análise de Risco</h2>
-      <span class="badge">Saúde e perfil</span>
-    </div>
-    <div class="section-body">
-      <p style="font-size:0.82rem; color:var(--muted); margin-bottom:18px;">Suas respostas são utilizadas exclusivamente para adequar a proposta de seguro ao seu perfil.</p>
-
-      <div class="risco-item">
-        <div class="risco-num">1</div>
-        <div class="risco-text">Você é fumante?</div>
-        <div class="risco-toggle">
-          <button class="risco-btn sim" onclick="toggleRisco(this, 'r1')">Sim</button>
-          <button class="risco-btn nao" onclick="toggleRisco(this, 'r1')">Não</button>
-        </div>
-        <input type="hidden" id="r1">
-      </div>
-
-      <div class="risco-item">
-        <div class="risco-num">2</div>
-        <div class="risco-text">Pratica esportes ou hobbies de risco (alpinismo, asa delta, motocross, etc)?</div>
-        <div class="risco-toggle">
-          <button class="risco-btn sim" onclick="toggleRisco(this, 'r2')">Sim</button>
-          <button class="risco-btn nao" onclick="toggleRisco(this, 'r2')">Não</button>
-        </div>
-        <input type="hidden" id="r2">
-      </div>
-
-      <div class="risco-item">
-        <div class="risco-num">3</div>
-        <div class="risco-text">Faz uso contínuo de alguma medicação?</div>
-        <div class="risco-toggle">
-          <button class="risco-btn sim" onclick="toggleRisco(this, 'r3')">Sim</button>
-          <button class="risco-btn nao" onclick="toggleRisco(this, 'r3')">Não</button>
-        </div>
-        <input type="hidden" id="r3">
-      </div>
-
-      <div class="risco-item">
-        <div class="risco-num">4</div>
-        <div class="risco-text">Tem pressão alta, diabetes ou alguma alteração cardíaca?</div>
-        <div class="risco-toggle">
-          <button class="risco-btn sim" onclick="toggleRisco(this, 'r4')">Sim</button>
-          <button class="risco-btn nao" onclick="toggleRisco(this, 'r4')">Não</button>
-        </div>
-        <input type="hidden" id="r4">
-      </div>
-
-      <div class="risco-item">
-        <div class="risco-num">5</div>
-        <div class="risco-text">Já teve hepatite ou algum problema respiratório?</div>
-        <div class="risco-toggle">
-          <button class="risco-btn sim" onclick="toggleRisco(this, 'r5')">Sim</button>
-          <button class="risco-btn nao" onclick="toggleRisco(this, 'r5')">Não</button>
-        </div>
-        <input type="hidden" id="r5">
-      </div>
-
-      <div class="risco-item">
-        <div class="risco-num">6</div>
-        <div class="risco-text">Já foi diagnosticado e/ou submetido a algum tratamento ou cirurgia?</div>
-        <div class="risco-toggle">
-          <button class="risco-btn sim" onclick="toggleRisco(this, 'r6')">Sim</button>
-          <button class="risco-btn nao" onclick="toggleRisco(this, 'r6')">Não</button>
-        </div>
-        <input type="hidden" id="r6">
-      </div>
-
-      <div class="risco-item" style="align-items:center;">
-        <div class="risco-num">7</div>
-        <div class="risco-input-row">
-          <span style="font-size:0.88rem; color:var(--text);">Altura e peso:</span>
-          <div>
-            <label>Altura</label>
-            <input type="text" id="altura" placeholder="Ex: 1,75m" style="width:90px;">
-          </div>
-          <div>
-            <label>Peso</label>
-            <input type="text" id="peso" placeholder="Ex: 80kg" style="width:90px;">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── 9. ANOTAÇÕES ── -->
+  <!-- ── 7. ANOTAÇÕES ── -->
   <div class="section">
     <div class="section-header">
       <span class="s-icon">📝</span>
@@ -768,15 +565,9 @@
       <span class="badge">Opcional</span>
     </div>
     <div class="section-body">
-      <div class="anotacoes-grid">
-        <div class="field">
-          <label>Observações gerais</label>
-          <textarea id="anotacoes" placeholder="Alguma informação adicional que queira compartilhar..." style="min-height:120px;"></textarea>
-        </div>
-        <div class="field">
-          <label>Próximo encontro — local, data e hora</label>
-          <textarea id="proximo_encontro" placeholder="Ex: Reunião por vídeo — 20/05/2025 às 14h" style="min-height:120px;"></textarea>
-        </div>
+      <div class="field">
+        <label>Observações gerais</label>
+        <textarea id="anotacoes" placeholder="Alguma informação adicional que queira compartilhar..." style="min-height:120px;"></textarea>
       </div>
     </div>
   </div>
@@ -811,21 +602,6 @@
     e.target.value = v;
   });
 
-  // Gender toggle
-  function toggleGender(el){
-    document.getElementById('btn-masc').classList.remove('active');
-    document.getElementById('btn-fem').classList.remove('active');
-    el.closest('.gender-btn').classList.add('active');
-  }
-
-  // Risco toggle
-  function toggleRisco(btn, id){
-    const parent = btn.closest('.risco-item');
-    parent.querySelectorAll('.risco-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById(id).value = btn.textContent.trim();
-  }
-
   // Gerar PDF via print
   function gerarPDF(){
     window.print();
@@ -854,8 +630,7 @@
 
   // Campos com ID fixo
   const camposFinanceiros = [
-    'despesa_mensal','renda_bruta','fgts','previdencia',
-    'seguro_existente','pensao','outras_rendas',
+    'renda_familiar','outras_rendas_familia','despesa_mensal',
     'edu_pre','edu_fund','edu_med','edu_sup','edu_pos'
   ];
   camposFinanceiros.forEach(id => {
